@@ -9,6 +9,16 @@ class TrxHistory:
         self.date = datetime.datetime.now()
 
 
+class LoanDetails:
+    def __init__(self, account, amount, interest, duration) -> None:
+        self.account = account
+        self.amount = amount
+        self.interest = interest / 100
+        self.duration = duration
+        self.paid_amount = 0
+        self.date = datetime.datetime.now()
+
+
 class User:
     def __init__(self, name, email, password, balance) -> None:
         self.name = name
@@ -18,6 +28,7 @@ class User:
         self.balance = balance
         self.transaction_history = []
         self.loan = 0
+        self.loan_history = []
         self.created_at = datetime.datetime.now()
 
     def create_account(self, bank):
@@ -62,3 +73,14 @@ class User:
 
     def available_balance(self):
         return self.balance
+
+    def get_loan_details(self):
+        if len(self.loan_history) == 0:
+            print("No loan history found")
+        else:
+            print(f"\n\nLoan history for {self.name}:\n")
+            for item in self.loan_history:
+                time_format = item.date.strftime("%d-%b-%Y %H:%M:%S")
+                print(
+                    f"Loan Amount: {item.amount}, Interest: {item.interest}, Duration: {item.duration}, Date: {time_format}"
+                )

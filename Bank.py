@@ -1,4 +1,4 @@
-from User import TrxHistory
+from User import TrxHistory, LoanDetails
 
 
 class Bank:
@@ -27,6 +27,7 @@ class Bank:
         if amount > 0:
             user.balance += amount
             self.total_balance += amount
+
             res = True
         else:
             print("Invalid amount")
@@ -39,6 +40,7 @@ class Bank:
             if self.total_balance >= amount:
                 user.balance -= amount
                 self.total_balance -= amount
+
                 res = True
             else:
                 print("Bank is bankrupt")
@@ -46,6 +48,21 @@ class Bank:
             print("Insufficient balance")
 
         return res
+
+    def provide_loan(self, user, amount, interest, duration):
+        if self.total_balance >= amount:
+            if self.is_loan_available and amount <= 2 * user.balance:
+                user.loan += amount
+                user.balance += amount
+                self.total_balance -= amount
+                self.total_loan += amount
+
+                obj = LoanDetails(user.name, amount, interest, duration)
+                user.loan_history.append(obj)
+            else:
+                print("Loan is not available")
+        else:
+            print("Bank is bankrupt")
 
     def get_total_balance(self):
         return self.total_balance

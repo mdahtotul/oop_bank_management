@@ -26,11 +26,13 @@ def main():
     user1.withdraw_money(bank, 2000)
     user1.deposit_money(bank, 3000)
     user1.transfer_money(user2, 1000, bank.total_balance)
+
+    bank.provide_loan(user3, 14002, 10, 2)
     # bank.list_accounts()
 
     print("-------------- Transaction History --------------")
-    user1.get_transaction_history()
-    user2.get_transaction_history()
+    # user1.get_transaction_history()
+    # user2.get_transaction_history()
 
 
 if __name__ == "__main__":
