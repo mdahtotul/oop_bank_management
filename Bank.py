@@ -22,6 +22,9 @@ class Bank:
         self.total_balance -= user.balance
         self.total_loan -= user.loan
 
+    def make_admin(self, user):
+        user.role = "Admin"
+
     def deposit(self, user, amount):
         res = False
         if amount > 0:
@@ -71,8 +74,9 @@ class Bank:
         return self.total_loan
 
     def list_accounts(self):
+        print("\n-------------- All Accounts --------------------\n")
         for account in self.accounts:
             print(
-                f"Name: {account.name} \nEmail: {account.email} \nBalance: {account.balance} \nLoan:{account.loan} \nRole: {account.role}"
+                f"Name: {account.name} \nEmail: {account.email} \nBalance: {account.balance} \nLoan: {account.loan} \nRole: {account.role}"
             )
             print("--------------------------------------------------\n")
