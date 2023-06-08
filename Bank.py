@@ -1,3 +1,6 @@
+from User import TrxHistory
+
+
 class Bank:
     def __init__(self, name, address) -> None:
         self.name = name
@@ -11,11 +14,38 @@ class Bank:
         self.accounts.append(user)
         self.total_balance += user.balance
         self.total_loan += user.loan
+        obj = TrxHistory("own", user.balance, "Deposit")
+        user.transaction_history.append(obj)
 
     def remove_account(self, user):
         self.accounts.remove(user)
         self.total_balance -= user.balance
         self.total_loan -= user.loan
+
+    def deposit(self, user, amount):
+        res = False
+        if amount > 0:
+            user.balance += amount
+            self.total_balance += amount
+            res = True
+        else:
+            print("Invalid amount")
+
+        return res
+
+    def withdraw(self, user, amount):
+        res = False
+        if user.balance >= amount:
+            if self.total_balance >= amount:
+                user.balance -= amount
+                self.total_balance -= amount
+                res = True
+            else:
+                print("Bank is bankrupt")
+        else:
+            print("Insufficient balance")
+
+        return res
 
     def get_total_balance(self):
         return self.total_balance

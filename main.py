@@ -16,7 +16,21 @@ def main():
     user3 = User("Kopa Samsu", "kopa@samsu.com", "adbdsc", 7000)
     user3.create_account(bank)
 
-    bank.list_accounts()
+    # bank.list_accounts()
+    print("#############################################\n")
+    print(f"Total Balance: {bank.get_total_balance()}")
+    # user can deposit money
+    user1.deposit_money(bank, 1070)
+    user1.deposit_money(bank, 4000)
+    user1.withdraw_money(bank, 1000)
+    user1.withdraw_money(bank, 2000)
+    user1.deposit_money(bank, 3000)
+    user1.transfer_money(user2, 1000, bank.total_balance)
+    # bank.list_accounts()
+
+    print("-------------- Transaction History --------------")
+    user1.get_transaction_history()
+    user2.get_transaction_history()
 
 
 if __name__ == "__main__":
